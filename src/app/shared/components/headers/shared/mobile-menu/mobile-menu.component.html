@@ -1,0 +1,87 @@
+<div class="mobile-menu-container">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close" (click)="hideMobileMenu()"><i class="icon-close"></i></span>
+
+        <form action="#" method="get" class="mobile-search" (submit)="submitSearchForm($event)">
+            <label for="mobile-search" class="sr-only">Search</label>
+            <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Wyszukaj produkt ..."
+                required>
+            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+        </form>
+
+        <nav class="mobile-nav">
+            <ul class="mobile-menu">
+                <li>
+                    <a routerLink="/">
+                      Nasze sklepy
+                        <span class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                    <ul>
+                        <li><a href="https://watch.vladiola.com/" target="_blank" rel="noopener">01 -
+                                Vladiola Watch</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a routerLink="/shop">
+                      Produkty
+                        <span class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                  <ul>
+                    <li>
+                      <a routerLink="/shop">Lista produktów</a>
+                    </li>
+                    <li>
+                      <a routerLink="/shop/cart">Koszyk</a>
+                    </li>
+                    <li>
+                      <a routerLink="/shop/checkout">Do płatności</a>
+                    </li>
+                    <li>
+                      <a routerLink="/shop/wishlist">Lista życzeń</a>
+                    </li>
+                    <li>
+                      <a routerLink="/shop/dashboard">Moje konto</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                    <a routerLink="/pages/about">
+                        Informacja
+                        <span class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                  <ul>
+                    <li>
+                      <a routerLink="/pages/about">O nas</a>
+                    </li>
+                    <li>
+                      <a routerLink="/pages/contact">Kontakt</a>
+                    </li>
+                    <li>
+                      <a routerLink="/pages/login">Zaloguj się</a>
+                    </li>
+                    <li>
+                      <a routerLink="/pages/faq">FAQ</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="https://blog.vladiola.com/" target="_blank">Blog</a>
+                </li>
+            </ul>
+        </nav>
+
+      <div class="menu-footer">
+        <button  routerLink="/pages/login" class="btn btn-outline-primary-2" *ngIf="!authorized()">
+          <span>Zaloguj się</span>
+          <i class="icon-arrow-right"></i>
+        </button>
+
+        <button  routerLink="/shop/dashboard" class="btn btn-outline-primary-2" *ngIf="authorized()">
+          <span>Panel użytkownika</span>
+          <i class="icon-user"></i>
+        </button>
+      </div>
+
+    </div>
+</div>

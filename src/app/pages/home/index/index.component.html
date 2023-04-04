@@ -1,0 +1,147 @@
+<main class="main home-page skeleton-body">
+    <div class="intro-slider-container">
+        <owl-carousel carouselClasses="intro-slider owl-dots-inside owl-theme" [options]="introSlider">
+            <div class="intro-slide bg-image intro-1 d-flex align-items-center" [style]="bannerStyles[0]">
+                <div class="container">
+                    <div class="intro-content position-static p-3 p-lg-0" contentAnim aniName="fadeInUpShorter" style="margin-top: 300px;">
+                        <h4 class="intro-subtitle font-size-normal letter-spacing-large text-primary text-uppercase font-weight-normal mb-1"><span>Oferta tygodnia</span></h4>
+                        <h2 class="intro-price text-white mb-2"><i>Nawet do <span class="text-primary">23% zniżek</span></i></h2>
+                        <a routerLink="/shop" class="btn letter-spacing-large btn-white text-uppercase mb-2 mt-2">Zobacz ofertę</a>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-slide bg-image intro-2 d-flex align-items-center" [style]="bannerStyles[1]">
+                <div class="container">
+                    <div class="row">
+                      <div class="intro-content position-static p-3 p-lg-0" contentAnim aniName="fadeInUpShorter" style="margin-top: 300px;">
+                        <h2 class="intro-price text-white mb-2"><i>Zobacz nową kolekcje <span class="text-primary">zegarków</span></i></h2>
+                        <a routerLink="/shop" class="btn letter-spacing-large btn-white text-uppercase mb-2 mt-2">Odkryj teraz</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </owl-carousel>
+    </div>
+
+    <div class="container">
+        <div class="banner-group my-md-n5 mt-1">
+            <div class="row no-gutters">
+                <div class="col-md-4 col-sm-6 col-12" contentAnim aniName="fadeInLeftShorter">
+                    <div class="banner mb-0">
+                        <vio-image src="assets/images/home/banners/banner-1.jpg" alt="Banner" width="390" height="500" fixedPt="49.9rem" style="background-color: #c99563;"></vio-image>
+                        <div class="banner-content text-center banner-content-center mb-0 my-md-4">
+                            <h4 class="banner-subtitle font-size-normal letter-spacing-large text-white text-uppercase font-weight-normal">Wyprzedaż</h4>
+                            <h3 class="banner-title text-white font-weight-normal text-uppercase my-4 mb-0">Zegarki&nbsp;<br>&amp; Akcesoria&nbsp;</h3>
+                            <h3 class="banner-price text-white text-uppercase my-4 mt-0">Zaoszczędź 30%</h3>
+                            <a routerLink="/shop" class="btn font-size-normal letter-spacing-large btn-dark text-uppercase mt-0 mt-md-3 font-weight-normal text-uppercase">Wyprzedaż sklepu</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="banner banner-overlay mb-0 banner-middle bg-image" style="background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.5)), url(assets/images/home/banners/banner-2.jpg) no-repeat center;">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-12" contentAnim aniName="fadeInRightShorter">
+                    <div class="banner mb-0" style="background-color: #f9f9f9;">
+                        <a routerLink="/shop">
+                            <vio-image src="assets/images/home/banners/banner-3.jpg"  draggable="false" style alt="Banner" width="390" height="500" fixedPt="49.9rem" ></vio-image>
+                        </a>
+                        <div class="banner-content text-center banner-content-center mt-2 mt-md-5">
+                            <h3 class="banner-title font-weight-normal text-uppercase mt-1 my-1">Bransolety&nbsp;<br>&amp; Pudełka</h3>
+                            <a routerLink="/shop" class="btn font-size-normal letter-spacing-large btn-dark text-uppercase mt-4 font-weight-normal text-uppercase">Kupuj teraz</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="banner banner-overlay mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)), url(assets/images/home/banners/banner-4.jpg) no-repeat center; background-size: cover; min-height: 500px; box-shadow: 0px 5px 15px 0px rgba(0,0,0,.3);">
+                        <div class="banner-content text-center banner-content-right px-3 p-lg-0 mt-lg-1">
+                            <h4 class="banner-subtitle font-size-normal letter-spacing-large text-white text-uppercase mb-2 font-weight-normal">Nasze marki</h4>
+                            <h3 class="banner-title text-white text-uppercase my-4 mb-0">Nowa kolekcja<br>G.Rossi & Perfekt 2023</h3>
+                            <p class="banner-txt text-white font-weight-normal my-4 mb-2 mb-md-4 mx-4">Nasze zegarki wyróżnia oryginalne wzornictwo oraz wysoka jakość w korzystnej cenie.</p>
+                            <a routerLink="/shop" class="btn font-size-normal letter-spacing-large btn-primary btn-dark text-uppercase my-2 mb-0">Kupuj kolekcję</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <vio-recent-collection [products]="newProducts" [loaded]="loaded"></vio-recent-collection>
+
+    <vio-top-collection [products]="featuredProducts" [loaded]="loaded"></vio-top-collection>
+
+    <div class="banner bg-image shadow-none" style="background-image: url(assets/images/home/banners/banner-5.jpg); background-color: #edeef3;">
+        <div class="banner-content text-center banner-content-center px-3 p-lg-0">
+            <img src="assets/images/home/diamond-ring.png" class="mb-2 mt-2 mx-auto w-auto" alt="" width="28" height="32" />
+            <h3 class="banner-title my-4" contentAnim aniName="blurIn">WYSOKA JAKOŚĆ OD 2001 ROKU</h3>
+            <h6 class="font-weight-normal">Wszystko, czego potrzebujesz, aby stworzyć idealną kolekcję</h6>
+            <p class="banner-txt mb-2 mb-lg-3">
+              W ofercie naszego sklepu prezentujemy jedynie zegarki znanych i cenionych producentów. <br>
+              To np. Casio, Michael Kors, G.Rossi, Perfect, Adexe, Albatross, Pacific, Albatros, Jordan Kerr, Tommy Hilfiger i wiele innych. <br>
+              To zegarki w hurcie dla kobiet, mężczyzn i dzieci, a także smartwatche, smartbandy i akcesoria. <br>
+              U nas każdy klient znajdzie coś dla siebie! Łącząc nasz asortyment ze swoim obecnym, można naprawdę wiele zyskać.
+            </p>
+            <a routerLink="/shop" class="btn font-size-normal letter-spacing-large btn-dark btn-primary my-4">ZOBACZ CO NOWEGO</a>
+        </div>
+    </div>
+
+    <div class="container pt-3 pt-md-7 small-group mb-8">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-9 col-12 popular mb-3 mb-lg-0">
+                <div class="heading heading-center">
+                    <h2 class="title text-uppercase mb-3" contentAnim aniName="blurIn">Popularne Produkty</h2>
+                    <span class="cross-txt position-relative py-2 pb-0">
+                        <i class="la la-diamond h5 mb-0"></i>
+                    </span>
+                </div>
+                <div *ngIf="!loaded else loadedBlock">
+                    <div class="skel-pro skel-product-col mb-2" *ngFor="let item of [1,2,3]">
+                    </div>
+                </div>
+                <ng-template #loadedBlock>
+                    <vio-product-small [product]="product" *ngFor="let product of randomProducts"></vio-product-small>
+                </ng-template>
+            </div>
+            <div class="col-lg-1 col-md-10 col-12 mb-3 mb-lg-0"></div>
+            <div class="col-lg-4 col-md-6 col-sm-9 col-12 service mb-3 mb-lg-0">
+                <div class="heading heading-center">
+                    <h2 class="title text-uppercase mb-3" contentAnim aniName="blurIn">Nasze Usługi</h2>
+                    <span class="cross-txt position-relative py-2 pb-0">
+                        <i class="la la-diamond h5 mb-0"></i>
+                    </span>
+                </div>
+                <div class="icon-boxes text-center">
+                    <div class="icon-box justify-content-center d-flex flex-column mb-0 pt-4">
+                        <span class="icon-box-icon mb-1 text-dark"><i class="icon-truck"></i></span>
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title font-size-normal letter-spacing-large text-uppercase">
+                              Płatność &amp; Dostawa</h3>
+                            <p class="font-weight-normal font-size-normal">
+                              Bezpłatna dostawa przy zamówieniach powyżej 100 PLN
+                    </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-boxes text-center">
+                    <div class="icon-box justify-content-center d-flex flex-column mb-0 pt-4">
+                        <span class="icon-box-icon mb-1 text-dark"><i class="icon-rotate-left"></i></span>
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title font-size-normal letter-spacing-large text-uppercase">Zwrot i zwrot pieniędzy</h3>
+                            <p class="font-weight-normal font-size-normal">Bezpłatna gwarancja 100% zwrotu pieniędzy</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-boxes text-center">
+                    <div class="icon-box justify-content-center d-flex flex-column mb-0 pt-4">
+                        <span class="icon-box-icon mb-1 text-dark"><i class="la la-unlock"></i></span>
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title font-size-normal letter-spacing-large text-uppercase">
+                              Bezpieczna płatność</h3>
+                            <p class="font-weight-normal font-size-normal">Oferujemy 100% biezpieczny system płatniczy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

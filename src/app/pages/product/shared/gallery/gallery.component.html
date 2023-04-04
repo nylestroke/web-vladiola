@@ -1,0 +1,10 @@
+<div class="product-lg position-relative gallery" style="min-height: 376px;">
+    <span class="product-label label-sale" *ngIf="product.discount">Wyprzedaż</span>
+    <span class="product-label label-out" *ngIf="!product.count || product.count === 0">Brak na stanie</span>
+
+    <owl-carousel [carouselClasses]="'product-gallery-carousel owl-full owl-nav-dark'" [options]="options">
+        <vio-image class="d-block position-relative" [src]="product.photos[i].url"
+            *ngFor="let item of product.photos;let i = index;">
+        </vio-image>
+    </owl-carousel>
+</div>

@@ -1,0 +1,70 @@
+<header class="header header-25">
+    <div class="header-top">
+        <div [class]="containerClass">
+            <div class="header-left">
+                <div class="d-flex align-items-center d-md-block text-secondary">
+                    <a href="tel:+48729368168"><i class="icon-mail-reply h6 text-secondary font-weight-normal" style="margin-right: 8px;"></i>Kontakt:
+                      <a href="mailto:support@vladiola.com" class="text-dark font-weight-normal">support@vladiola.com</a></a>
+                </div>
+            </div>
+            <div class="header-right">
+<!--                <div class="social-icons social-icons-color d-none d-md-flex">-->
+<!--                    <a href="https://facebook.com/#" target="_blank" class="social-icon social-facebook" title="Facebook"><i-->
+<!--                            class="icon-facebook-f"></i></a>-->
+<!--                    <a href="https://twitter.com/#" target="_blank" class="social-icon social-twitter" title="Twitter"><i-->
+<!--                            class="icon-twitter"></i></a>-->
+<!--                    <a href="https://instagram.com/#" target="_blank" class="social-icon social-instagram" title="Instagram"><i-->
+<!--                            class="icon-instagram"></i></a>-->
+<!--                </div>-->
+
+                <ul class="top-menu text-secondary">
+                    <li>
+                        <ul class="d-lg-flex align-items-center">
+                            <li class="account-links font-weight-normal">
+                              <a  *ngIf="!authorized() else authorizedBlock" style="cursor: pointer;" (click)="showLoginModal($event)">
+                                <i class="icon-user d-none d-lg-block"></i>Zaloguj się</a>
+                              <ng-template #authorizedBlock>
+                                <a routerLink="/shop/dashboard">
+                                  <i class="icon-user d-none d-lg-block"></i>Cześć, {{ user?.name + ', ' + user?.surname }}</a>
+                              </ng-template>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle">
+        <div [class]="containerClass">
+            <div class="header-left d-lg-block d-none">
+                <vio-header-search></vio-header-search>
+            </div>
+            <div class="header-center">
+                <a routerLink="/" class="logo">
+                    <img src="assets/images/home/logo.png" class="bg-transparent" alt="vio Logo">
+                </a>
+            </div>
+            <div class="header-right">
+                <vio-wishlist-menu></vio-wishlist-menu>
+
+                <vio-cart-menu></vio-cart-menu>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-wrapper" [style.height]="utilsService.isSticky? utilsService.stickyHeight + 'px' : '' ">
+        <div class="header-bottom sticky-header" [class.fixed]="utilsService.isSticky">
+            <div [class]="containerClass">
+                <div class="header-left">
+                    <vio-main-menu></vio-main-menu>
+
+                    <vio-mobile-button></vio-mobile-button>
+                </div>
+
+                <div class="header-right overflow-hidden">
+                    <i class="la la-lightbulb-o"></i>
+                    <p class="text-white text-uppercase">Zniżki aż Do 23% taniej</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

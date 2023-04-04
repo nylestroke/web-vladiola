@@ -1,0 +1,106 @@
+<div class="product-details-tab">
+    <ul ngbNav #nav="ngbNav" class="justify-content-center nav nav-pills">
+        <li ngbNavItem>
+            <a ngbNavLink>
+                Szczególna Informacja
+            </a>
+            <ng-template ngbNavContent>
+                <div class="product-desc-content">
+                    <h3>Opis produktu</h3>
+                  <p [innerHTML]="product.description"></p>
+                </div>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>
+              Dostawa & zwroty
+            </a>
+            <ng-template ngbNavContent>
+                <div class="product-desc-content">
+                    <h3>Dostawa & zwroty</h3>
+                    <p>Dostarczamy po całej Polsce. Aby uzyskać szczegółowe informacje na temat oferowanych
+                      przez nas opcji dostawy, zapoznaj się z naszą <a style="cursor: pointer;">Informacją o dostawie.</a><br>
+                      Mamy nadzieję, że pokochasz każdy zakup, ale jeśli kiedykolwiek będziesz musiał zwrócić przedmiot, możesz to zrobić w ciągu miesiąca od otrzymania.
+                      Aby uzyskać szczegółowe informacje o tym, jak dokonać zwrotu, zapoznaj się z naszą <a
+                            style="cursor: pointer;">Informacją o zwrotach.</a></p>
+                </div>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>
+                Opinie ({{product.reviews.length}})
+            </a>
+            <ng-template ngbNavContent>
+                <div class="reviews">
+                    <div class="review" *ngFor="let review of product.reviews">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <h4><a style="cursor: pointer;">{{review.name}}</a></h4>
+                                <div class="ratings-container">
+                                    <div class="ratings">
+                                        <div class="ratings-val" [style.width]="+review.opinion * 20 + '%'"></div>
+                                        <span class="tooltip-text">{{review.opinion}}</span>
+                                    </div>
+                                </div>
+                                <span class="review-date">{{review.created_at | date : 'short' : 'GMT+2' : 'pl'}}</span>
+                            </div>
+                            <div class="col">
+                                <h4>{{getReviewTitle(review.opinion)}}</h4>
+
+                                <div class="review-content">
+                                    <p>{{review.message}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reply">
+                    <div class="title-wrapper text-left">
+                        <h3 class="title title-simple text-left text-normal">Dodaj opinię
+                        </h3>
+                        <p>Twoj adres e-mail nie bedzie opublikowany. Wymagane pola są zaznaczone *</p>
+                    </div>
+                    <div class="rating-form">
+                        <label for="rating" class="text-dark">Twoja ocena *</label>
+                        <span class="rating-stars selected">
+                            <a [class]="'star-' + num " style="cursor: pointer;" (click)="setRating($event)"
+                                *ngFor="let num of [1,2,3,4,5]">{{ num }}</a>
+                        </span>
+
+                        <select name="rating" id="rating" required="true" style="display: none">
+                            <option value="">Ocena…</option>
+                            <option value="5">Perfect</option>
+                            <option value="4">Good</option>
+                            <option value="3">Average</option>
+                            <option value="2">Not that bad</option>
+                            <option value="1">Very poor</option>
+                        </select>
+                    </div>
+                    <form [formGroup]="reviewForm" (submit)="addReview()">
+                        <textarea id="reply-message" cols="30" rows="6" class="form-control mb-2"
+                                  formControlName="message"
+                                  [class.errored]="hasError('message', 'required')"
+                            placeholder="Komentarz *" required></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="reply-name" name="reply-name"
+                                       formControlName="name"
+                                       [class.errored]="hasError('name', 'required')"
+                                    placeholder="Imię *" required />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="reply-email" name="reply-email"
+                                       formControlName="email"
+                                       [class.errored]="hasError('email', 'required') ||
+                                                        hasError('email', 'email')"
+                                    placeholder="Adres e-mail *" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="reviewForm.invalid" >Wyślij</button>
+                    </form>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+</div>

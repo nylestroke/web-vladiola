@@ -1,0 +1,37 @@
+<div class="product product-sm bg-white shadow-none product-list align-items-start">
+    <figure class="product-media">
+        <a [routerLink]="['/product/'+ product.id]">
+            <vio-image [src]="product.photos[0].url" alt="Product" class="product-image">
+            </vio-image>
+            <vio-image [src]="product.photos[1].url" alt="Product" class="product-image-hover"
+                *ngIf="product.photos[1]"></vio-image>
+        </a>
+    </figure>
+
+    <div class="product-body">
+        <div class="product-cat text-left">
+            <h3 class="product-title font-size-normal mb-1">
+                <a [routerLink]="['/product/'+ product.id]">{{ product.html_title }}</a>
+            </h3>
+<!--            <div class="ratings-container justify-content-start">-->
+<!--                <div class="ratings">-->
+<!--                    <div class="ratings-val" [style.width]="product.gabaryt * 20 + '%'"></div>-->
+<!--                    <span class="tooltip-text">{{ product.ratings.toFixed(2) }}</span>-->
+<!--                </div>-->
+<!--                <span class="ratings-text">( {{ product.review }} Reviews )</span>-->
+<!--            </div>-->
+
+            <div class="product-price font-size-normal text-dark justify-content-start" *ngIf="!product.count || product.count === 0 else elseBlock">
+                <span class="out-price">{{ price }} PLN</span>
+                <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+            </div>
+
+          <ng-template #elseBlock>
+            <div class="product-price font-size-normal text-dark justify-content-start">
+              <div class="product-price font-size-normal text-dark justify-content-start">{{ price }} PLN</div>
+              <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+            </div>
+          </ng-template>
+        </div>
+    </div>
+</div>

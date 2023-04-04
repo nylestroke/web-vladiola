@@ -1,0 +1,78 @@
+<div class="main shop">
+    <vio-page-header title="Lista produktów" subtitle="Sklep"></vio-page-header>
+
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Strona główna</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/shop">Sklep</a>
+                </li>
+                <li class="breadcrumb-item active">Lista produktów</li>
+                <li class="breadcrumb-item" *ngIf="searchTerm !== ''">
+                    <span>Szukamy - {{ searchTerm }}</span>
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 skeleton-body sekl-shop-products" [class.loaded]="loaded">
+                    <div class="toolbox">
+                        <div class="toolbox-left">
+                            <div class="toolbox-info">
+                                Pokazano
+                                <span>{{ products.length * (page + 1) }} z {{ totalCount }}</span> produktów
+                            </div>
+                        </div>
+
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Sortuj według:</label>
+                                <div class="select-custom">
+                                    <select name="sortby" id="sortby" class="form-control"
+                                        (change)="changeOrderBy($event)" [value]="orderBy">
+                                        <option value="default">Domyślnie</option>
+                                        <option value="title-az">Marka A-Z</option>
+                                        <option value="title-za">Marka Z-A</option>
+                                        <option value="price-up">Cena - rosnąco</option>
+                                        <option value="price-down">Cena - malejąco</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <vio-shop-list [products]="products" [loaded]="loaded">
+                    </vio-shop-list>
+
+                    <vio-pagination [perPage]="perPage" [total]="totalCount" *ngIf="totalCount > perPage">
+                    </vio-pagination>
+                </div>
+
+                <aside class="col-lg-3 skel-shop-sidebar order-lg-first skeleton-body" [class.loaded]="firstLoad">
+                    <div *ngIf="!firstLoad else sidebarLoaded">
+                        <div class="skel-widget"></div>
+                        <div class="skel-widget"></div>
+                        <div class="skel-widget"></div>
+                        <div class="skel-widget"></div>
+                    </div>
+                    <ng-template #sidebarLoaded>
+                        <vio-shop-sidebar [toggle]="toggle">
+                        </vio-shop-sidebar>
+
+                        <button class="sidebar-fixed-toggler" (click)="toggleSidebar()" *ngIf="toggle">
+                            <i class="icon-cog"></i>
+                        </button>
+
+                        <div class="sidebar-filter-overlay" (click)="hideSidebar()"></div>
+                    </ng-template>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

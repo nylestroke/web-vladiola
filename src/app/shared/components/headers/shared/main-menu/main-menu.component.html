@@ -1,0 +1,99 @@
+<nav class="main-nav">
+    <ul class="menu sf-arrows">
+        <li class="megamenu-container" [class.active]="current==='/'">
+            <a routerLink="/" class="sf-with-ul">Nasze sklepy</a>
+
+            <div class="megamenu shopmenu">
+                <div class="menu-col">
+                    <div class="menu-title">Wybierz jeden z naszych sklepów</div>
+
+                    <div class="shop-list">
+                        <div class="shop-item">
+                            <a href="https://watch.vladiola.com/">
+                                <span class="shop-bg"
+                                    style="background-image: url(assets/images/menu/shops/watch.png)"></span>
+                                <span class="shop-title">Vladiola Watch</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li [class.active]="current.includes('/shop')">
+            <a routerLink="/shop" class="sf-with-ul">Produkty</a>
+
+            <div class="megamenu megamenu-md">
+                <div class="row no-gutters">
+                    <div class="col-md-8">
+                        <div class="menu-col">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="menu-title">Strony sklepu</div>
+
+                                    <ul>
+                                      <li [class.active]="current === '/shop'">
+                                        <a routerLink="/shop">Lista produktów</a>
+                                      </li>
+                                        <li [class.active]="current.includes('shop/cart')">
+                                            <a routerLink="/shop/cart">Koszyk</a>
+                                        </li>
+                                        <li [class.active]="current.includes('shop/checkout')">
+                                            <a routerLink="/shop/checkout">Do płatności</a>
+                                        </li>
+                                        <li [class.active]="current.includes('shop/wishlist')">
+                                            <a routerLink="/shop/wishlist">Lista życzeń</a>
+                                        </li>
+                                        <li [class.active]="current.includes('shop/dashboard')">
+                                            <a routerLink="/shop/dashboard">Moje konto</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="banner banner-overlay">
+                            <a routerLink="/shop" class="banner banner-menu">
+                                <img src="assets/images/menu/banner-3.jpg" alt="Banner" width="218" height="314" />
+
+                                <div class="banner-content banner-content-top">
+                                    <div class="banner-title text-white">
+                                        Ostatnia
+                                        <br />Szansa na
+                                        <br />
+                                        <span>
+                                            <strong>Zniżki</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li [class.active]="current.includes('/pages')">
+            <a style="cursor: pointer;" class="sf-with-ul">Informacja</a>
+
+            <ul>
+                <li [class.active]="current.includes('pages/about')">
+                    <a routerLink="/pages/about">O nas</a>
+                </li>
+                <li [class.active]="current.includes('pages/contact')">
+                    <a routerLink="/pages/contact">Kontakt</a>
+                </li>
+                <li [class.active]="current.includes('pages/login')">
+                    <a routerLink="/pages/login">Zaloguj się</a>
+                </li>
+                <li [class.active]="current.includes('pages/faq')">
+                    <a routerLink="/pages/faq">FAQ</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="https://blog.vladiola.com/" target="_blank">Blog</a>
+        </li>
+    </ul>
+</nav>

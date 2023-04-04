@@ -1,0 +1,21 @@
+.loader-block {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(27, 27, 27, 0.4);
+  cursor: not-allowed;
+  color: #e1ded4 !important;
+  z-index: 10000;
+
+  .spinner {
+    width: 128px;
+    height: 128px;
+  }
+}

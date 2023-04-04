@@ -1,0 +1,16 @@
+<div class="products mb-3">
+    <p class="no-results" *ngIf="products.length === 0 && loaded else resultBlock">Brak produktów pasujących do Twojego wyboru.</p>
+
+    <ng-template #resultBlock>
+          <div class="row" *ngIf="!loaded else elseBlock">
+              <div class="skel-pro col-6 col-md-4 col-lg-4" *ngFor="let item of fakeArray"></div>
+          </div>
+        <ng-template #elseBlock>
+          <div class="row">
+            <div class="col-6 col-md-4 col-lg-4" *ngFor="let product of products | slice : 0 : 12">
+              <vio-product-helper [product]="product" class="w-100"></vio-product-helper>
+            </div>
+          </div>
+        </ng-template>
+    </ng-template>
+</div>

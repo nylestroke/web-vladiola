@@ -1,0 +1,170 @@
+<main class="main">
+    <vio-page-header title="Płatność" subtitle="Sklep"></vio-page-header>
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Strona główna</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/shop/sidebar/3cols">Sklep</a>
+                </li>
+                <li class="breadcrumb-item active">Płatność</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="checkout">
+            <div class="container">
+                <form [formGroup]="checkoutForm" (submit)="checkout()" >
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2 class="checkout-title">Szczegóły płatności</h2>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Imię *</label>
+                                    <input type="text" class="form-control" name="firstName" required formControlName="name" >
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label>Nazwisko *</label>
+                                    <input type="text" class="form-control" name="lastName" formControlName="surname" required>
+                                </div>
+                            </div>
+
+                            <label>Nazwa firmy (Opcjonalne)</label>
+                            <input type="text" class="form-control" name="company" formControlName="company_name" >
+
+                            <label>Adres zamieszkania *</label>
+                            <input type="text" class="form-control" name="street1" placeholder="Numer domu i nazwa ulicy" formControlName="address"  required>
+
+                            <label>Miasto *</label>
+                            <input type="text" name="city" class="form-control" formControlName="city" required>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Kod pocztowy *</label>
+                                    <input type="text" name="postcode" class="form-control" formControlName="postcode" required>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label>Numer telefonu *</label>
+                                    <input type="tel" name="tel" class="form-control" formControlName="phone" required>
+                                </div>
+                            </div>
+
+                            <label>Adres e-mail *</label>
+                            <input type="email" name="email" class="form-control" formControlName="email" required>
+
+                            <label>Uwagi dotyczące zamówień (Opcjonalne)</label>
+                            <textarea class="form-control" cols="30" rows="4"
+                                      formControlName="notes"
+                                      maxlength="120"
+                                placeholder="Uwagi dotyczące Twojego zamówienia, np. specjalne notatki dotyczące dostawy"></textarea>
+                        </div>
+                        <aside class="col-lg-3">
+                            <div class="summary">
+                                <h3 class="summary-title">Twoje zamówienie</h3>
+
+                                <table class="table table-summary">
+                                    <thead>
+                                        <tr>
+                                            <th>Produkty</th>
+                                            <th>Łącznie</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let product of cartItems">
+                                            <td><a
+                                                    [routerLink]="['/product/'+ product.id]">{{ product.html_title }}</a>
+                                            </td>
+                                            <td>{{ product.sum.toFixed( 2 ) }} PLN</td>
+                                        </tr>
+                                        <tr class="summary-subtotal">
+                                            <td>Suma częściowa :</td>
+                                            <td>{{ (cartService.priceTotal | async).toFixed(2) }} PLN</td>
+                                        </tr>
+
+                                        <tr class="summary-shipping">
+                                          <td>Dostawa:</td>
+                                          <td>&nbsp;</td>
+                                        </tr>
+
+                                        <tr class="summary-shipping-row">
+                                          <td>
+                                            <div class="custom-control custom-radio">
+                                              <input type="radio" id="free-shipping" name="shipping"
+                                                     class="custom-control-input" (change)="changeShipping(0)"
+                                                     checked>
+                                              <label class="custom-control-label" for="free-shipping">Darmowa dostawa</label>
+                                            </div>
+                                          </td>
+                                          <td>0.00 PLN</td>
+                                        </tr>
+
+                                        <tr class="summary-shipping-row">
+                                          <td>
+                                            <div class="custom-control custom-radio">
+                                              <input type="radio" id="standart-shipping" name="shipping"
+                                                     class="custom-control-input" (change)="changeShipping(10)">
+                                              <label class="custom-control-label"
+                                                     for="standart-shipping">Standardowa:</label>
+                                            </div>
+                                          </td>
+                                          <td>10.00 PLN</td>
+                                        </tr>
+
+                                        <tr class="summary-shipping-row">
+                                          <td>
+                                            <div class="custom-control custom-radio">
+                                              <input type="radio" id="express-shipping" name="shipping"
+                                                     class="custom-control-input" (change)="changeShipping(20)">
+                                              <label class="custom-control-label"
+                                                     for="express-shipping">Kurier InPost:</label>
+                                            </div>
+                                          </td>
+                                          <td>20.00 PLN</td>
+                                        </tr>
+
+                                        <tr class="summary-total">
+                                            <td>Do opłaty:</td>
+                                            <td>{{ totalPrice(cartService.priceTotal | async).toFixed(2) }} PLN</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <vio-accordion adClass="accordion-summary">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h2 class="card-title">
+                                                <a class="toggle-button" role="button"
+                                                   style="cursor: pointer;" aria-expanded="true">
+                                                  Przelewy24
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="collapse show">
+                                            <div class="card-body">
+                                                <img src="assets/images/Przelewy24_logo.png" width="80" class="my-3" alt="przelewy logo">
+                                              Przelewy 24 to system płatności online, umożliwiający dokonanie szybkiej
+                                              płatności za zakupy. Dzięki płatnościom z wykorzystaniem platformy Przelewy 24
+                                              możesz bezproblemowo dokonać płatności ze swojego konta bankowego lub kartą płatniczą.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </vio-accordion>
+
+                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block" [disabled]="checkoutForm.invalid" >
+                                    <span class="btn-text">Złożyć zamówienie</span>
+                                    <span class="btn-hover-text">Przejdź do płatności</span>
+                                </button>
+                            </div>
+                        </aside>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

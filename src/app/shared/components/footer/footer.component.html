@@ -1,0 +1,85 @@
+<footer class="footer mb-0" style="background-color: #222;">
+    <div class="footer-newsletter pt-4">
+        <div [ngClass]="containerClass">
+            <div class="heading heading-center">
+                <h2 class="title my-2 mt-0">ZAPISZ SIĘ DO NEWSLETTERA</h2>
+                <p class="text-secondary">i otrzymaj kupon o wartości 5% na pierwsze zakupy</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                    <form action="#">
+                        <div class="input-group d-sm-flex d-block">
+                            <input type="email" class="form-control font-size-normal text-truncate" placeholder="Wprowadź swój adres e-mail" aria-label="Email Adress" aria-describedby="newsletter-btn" required="">
+                            <div class="input-group-append mt-sm-0">
+                                <button class="btn font-size-normal letter-spacing-large btn-white" type="submit" id="newsletter-btn"><span>ZAPISZ SIĘ</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div [ngClass]="containerClass">
+        <hr class="mt-0 mb-0" style="border-top-color: #444">
+    </div>
+
+    <div class="footer-middle">
+        <div [ngClass]="containerClass">
+            <div class="row">
+              <div class="col-lg-2"></div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title text-uppercase text-white">Przydatne linki</h4>
+
+                        <ul class="widget-list">
+                            <li><a routerLink="pages/about">O nas</a></li>
+                            <li><a routerLink="pages/faq">FAQ</a></li>
+                            <li><a routerLink="pages/contact">Skontaktuj się z nami</a></li>
+                            <li><a routerLink="pages/login">Zaloguj się</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title text-uppercase text-white ">Obsługa klienta</h4>
+
+                        <ul class="widget-list">
+                            <li><a routerLink="pages/faq">Zwroty</a></li>
+                            <li><a routerLink="pages/faq">Wysyłka</a></li>
+                            <li><a routerLink="pages/statute">Regulamin</a></li>
+                            <li><a routerLink="pages/privacy">Polityka prywatności</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title text-uppercase text-white">Moje konto</h4>
+
+                        <ul class="widget-list">
+                            <li><a routerLink="/shop/dashboard">Panel użytkownika</a></li>
+                            <li><a routerLink="/shop/cart">Zobacz Koszyk</a></li>
+                            <li><a routerLink="/shop/wishlist">Moja lista życzeń</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="flex-column align-items-center pt-5" [ngClass]="containerClass">
+<!--            <figure class="footer-payments mb-1 mr-auto">-->
+<!--                <img src="assets/images/payments.png" class="mb-2" alt="Payment methods" width="272" height="20">-->
+<!--            </figure>-->
+            <a routerLink="/" class="mb-2">
+                <img src="assets/images/home/logo-footer.png" alt="Footer Logo" width="140"
+                    height="60">
+            </a>
+            <p class="footer-copyright text-secondary font-weight-normal font-size-normal">Copyright © {{ year }} <strong>Vladiola</strong>. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </div>
+</footer>

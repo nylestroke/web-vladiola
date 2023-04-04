@@ -1,0 +1,117 @@
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Panel użytkownika<span>Sklep</span></h1>
+        </div>
+    </div>
+    <nav class="breadcrumb-nav mb-3">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Strona główna</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/shop/sidebar/3cols">Sklep</a>
+                </li>
+                <li class="breadcrumb-item active">Panel użytkownika</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="dashboard">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-md-4 col-lg-3">
+                        <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist" tabClick>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="cursor: pointer;" role="tab"
+                                    (click)="nav.select('tab-1')">Informacja</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="cursor: pointer;" role="tab"
+                                    (click)="nav.select('tab-2')">Zamówienia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="cursor: pointer;" role="tab" (click)="nav.select('tab-3')">Szczegóły Konta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" (click)="apiService.fetchLogout()">Wyloguj się</a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <div class="col-md-8 col-lg-9">
+                        <div class="tab-content">
+                            <ul ngbNav #nav="ngbNav">
+                                <li [ngbNavItem]="'tab-1'">
+                                    <ng-template ngbNavContent>
+                                        <p>Cześć <span class="font-weight-normal text-dark">{{ user?.name + ', ' + user?.surname  }}</span> (nie jesteś <span
+                                                class="font-weight-normal text-dark">tym użytkownikiem</span>? <a  style="cursor: pointer;" class="tab-trigger-link link-underline"
+                                                (click)="apiService.fetchLogout()" >Wyloguj się</a>)
+                                            <br>
+                                          Za pomocą panelu nawigacyjnego konta możesz przeglądać swoje <a style="cursor: pointer;"
+                                                (click)="nav.select('tab-2'); viewTab( $event, 0, 1 );"
+                                                class="tab-trigger-link link-underline">ostatnie zamówienia</a>, <br> oraz <a
+                                                style="cursor: pointer;"
+                                                (click)="nav.select('tab-4'); viewTab( $event, 0, 3 );"
+                                                class="tab-trigger-link">edytować swoje hasło i dane konta</a>.</p>
+                                    </ng-template>
+                                </li>
+
+                                <li [ngbNavItem]="'tab-2'">
+                                    <ng-template ngbNavContent>
+                                        <p>Żadne zamówienie nie zostało jeszcze złożone.</p>
+                                        <a routerLink="/shop" class="btn btn-outline-primary-2"><span>Powrót do sklepu
+                                        </span><i class="icon-long-arrow-right"></i></a>
+                                    </ng-template>
+                                </li>
+
+                                <li [ngbNavItem]="'tab-3'">
+                                    <ng-template ngbNavContent>
+                                        <form [formGroup]="userForm" (submit)="submitEdit()">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label>Imię *</label>
+                                                    <input type="text" class="form-control" formControlName="name" required>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>Nazwisko *</label>
+                                                    <input type="text" class="form-control" formControlName="surname" required>
+                                                </div>
+                                            </div>
+
+                                            <label>Nazwa użytkownika *</label>
+                                            <input type="text" class="form-control" formControlName="nickname">
+                                            <small class="form-text">W ten sposób Twoje imię i nazwisko będzie wyświetlane w
+                                              sekcji konta oraz w recenzjach</small>
+
+                                            <label>Adres e-mail *</label>
+                                            <input type="email" class="form-control" formControlName="email" required>
+
+                                            <label>Aktualne hasło (pozostaw puste, aby pozostawić bez zmian)</label>
+                                            <input type="password" formControlName="old_password" class="form-control">
+
+                                            <label>Nowe hasło (pozostaw puste, aby pozostawić bez zmian)</label>
+                                            <input type="password"  formControlName="password" class="form-control">
+
+                                            <label>Potwierdź nowe hasło</label>
+                                            <input type="password" formControlName="re_password" class="form-control mb-2">
+
+                                            <button type="submit" class="btn btn-outline-primary-2" [disabled]="userForm.invalid">
+                                                <span>ZAPISZ ZMIANY</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                        </form>
+                                    </ng-template>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

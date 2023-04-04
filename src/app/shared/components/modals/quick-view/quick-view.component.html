@@ -1,0 +1,101 @@
+<div class="container quickView-container quickView-two" style="padding-left: 0; padding-right: 0">
+    <button title="Close (Esc)" type="button" class="mfp-close" (click)="closeQuickView()">×</button>
+
+    <div class="quickView-content skeleton-body">
+        <div class="row skel-pro-single skel-quickview mb-0" [ngClass]="{loaded: loaded}">
+            <div class="col-lg-6 p-0 d-flex flex-lg-row flex-column">
+                <div class="skel-product-gallery"></div>
+                <div class="product-sm col-lg-2 row p-0 order-lg-first order-last px-2 p-lg-0 m-lg-0 position-relative"
+                    id="product-image-gallery" *ngIf="product">
+                    <a style="cursor: pointer;"
+                        [ngClass]="'product-gallery-item h-auto p-lg-0 mb-0 mb-lg-1 ' + ( i === currentIndex ? ' active' : '' )"
+                        (click)="changeImage( $event, i )" *ngFor="let item of product.photos | slice : 0 : 4; let i = index;">
+                        <vio-image [src]="product.photos[i].url" alt="Product side"
+                            class="product-image mb-0" [fixedPt]="paddingTop" [width]="80" [height]="110">
+                        </vio-image>
+                    </a>
+                </div>
+                <div class="product-lg mb-1 mb-lg-0 col-lg-10 pl-lg-3 pl-0 pr-0 pr-lg-3 order-lg-last order-first"
+                     style="margin-bottom: auto!important; margin-top: auto!important;"
+                    *ngIf="product">
+                    <span class="product-label label-sale" *ngIf="product.discount">Wyprzedaż</span>
+                    <span class="product-label label-out" *ngIf="!product.count || product.count === 0">Brak na stanie</span>
+
+                    <owl-carousel carouselClasses="product-gallery-carousel owl-full owl-nav-dark" [options]="options"
+                        id="owl-quickview" #singleSlider>
+                        <vio-image class="d-block position-relative"
+                            *ngFor="let item of product.photos | slice : 0 : 4; let i = index;" [src]="item.url" [width]="80" [height]="110">
+                        </vio-image>
+                    </owl-carousel>
+                </div>
+            </div>
+            <div class="col-lg-6 quickview-desc pl-0 pl-lg-4 pr-0 mt-3 mt-lg-0">
+                <div class="entry-summary">
+                    <div class="col-md-12">
+                        <div class="entry-summary1 mt-2 mt-md-0"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="entry-summary2"></div>
+                    </div>
+                </div>
+
+                <div class="product-details" *ngIf="product">
+                    <h1 class="product-title">{{ product.html_title }}</h1>
+
+<!--                    <div class="ratings-container">-->
+<!--                        <div class="ratings">-->
+<!--                            <div class="ratings-val" [style.width]="product.ratings * 20 + '%'"></div>-->
+<!--                            <span class="tooltip-text">{{ product.ratings.toFixed(2) }}</span>-->
+<!--                        </div>-->
+<!--                        <span class="ratings-text">( {{ product.review }} Reviews )</span>-->
+<!--                    </div>-->
+
+                  <div class="product-price" *ngIf="!product.count || product.count === 0 else elseBlock">
+                    <span class="out-price">{{ product.price.toFixed(2) }} PLN</span>
+                    <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+                  </div>
+
+                  <ng-template #elseBlock>
+                    <div class="product-price">{{product.price.toFixed(2)}} PLN
+                      <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+                    </div>
+                  </ng-template>
+
+                    <div class="product-content">
+                        <p [innerHTML]="getProductDescription()"></p>
+                    </div>
+
+                    <div class="details-filter-row details-row-size">
+                        <label for="qty">Ilość:</label>
+                        <vio-quantity-input [max]="product.count" (changeQty)="onChangeQty( $event )" [value]="qty" id="qty">
+                        </vio-quantity-input>
+                    </div>
+
+                    <div class="product-details-action">
+                        <a style="cursor: pointer;" class="btn-product btn-cart"
+                            [class.btn-disabled]="!cartService.canAddToCart( product, qty )"
+                            (click)="addCart( $event )"><span>dodaj do koszyka</span></a>
+
+                        <div class="details-action-wrapper">
+                            <a style="cursor: pointer;" class="btn-product btn-wishlist"
+                                [class.added-to-wishlist]="isInWishlist()" (click)="addToWishlist($event)">
+                                <span>{{ isInWishlist() ? 'Idź' : 'Dodaj' }} do listy życzeń</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-details-footer">
+                        <div class="product-cat w-100 text-truncate">
+                            <span>Kategoria:</span>
+                            <span>
+                                <a [routerLink]="['/shop']" (click)="closeQuickView()"
+                                    [queryParams]="{category: product.category}">{{ product.category.name }}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

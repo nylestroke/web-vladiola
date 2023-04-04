@@ -1,0 +1,73 @@
+<div class="product product-7 text-center">
+    <figure class="product-media">
+        <span class="product-label label-sale" *ngIf="product.discount">Wyprzedaż</span>
+        <span class="product-label label-out" *ngIf="!product.count || product.count === 0">Brak na stanie</span>
+
+        <a [routerLink]="['/product/'+ product.id]">
+            <vio-image [src]="product.photos[0].url" alt="Product" class="product-image" *ngIf="product.photos[0]">
+            </vio-image>
+            <vio-image [src]="product.photos[1].url" alt="Product" class="product-image-hover"
+                *ngIf="product.photos[1]"></vio-image>
+        </a>
+
+        <div class="product-action-vertical">
+            <a style="cursor: pointer;" class="btn-product-icon btn-wishlist btn-expandable"
+                [class.added-to-wishlist]="isInWishlist()" (click)="addToWishlist($event)">
+                <span>{{ isInWishlist() ? 'idź' : 'dodaj' }} do listy życzeń</span>
+            </a>
+            <a style="cursor: pointer;" class="btn-product-icon btn-quickview" title="Szybki podgląd"
+                (click)="quickView($event)"><span>Szybki podgląd</span></a>
+        </div>
+        <div class="product-action" *ngIf="product.count && product.count !== 0">
+          <button class="btn-product btn-cart" (click)="addToCart($event)">
+            <span>dodaj do koszyka</span>
+          </button>
+        </div>
+    </figure>
+
+    <div class="product-body">
+        <div class="product-cat">
+            <span>
+                <a [routerLink]="['/shop']" [queryParams]="{category: product.category}">{{ product.category.name }}</a>
+            </span>
+        </div>
+
+        <h3 class="product-title">
+            <a [routerLink]="['/product/'+ product.id]">{{ product.html_title }}</a>
+        </h3>
+
+      <div class="product-price" *ngIf="!product.count || product.count === 0 else elseBlock">
+        <span class="out-price">{{ product.price.toFixed(2) }} PLN</span>
+        <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+      </div>
+
+      <ng-template #elseBlock>
+        <div class="product-price font-size-normal mb-0 text-dark justify-content-center w-100">{{product.price.toFixed(2)}} PLN
+          <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+        </div>
+      </ng-template>
+
+<!--        <div class="product-price" *ngIf="!product.count || product.count === 0 else elseBlock">-->
+<!--            <span class="out-price">{{ product.price }} PLN</span>-->
+<!--        </div>-->
+
+<!--        <ng-template #elseBlock>-->
+<!--            <div class="product-price">${{product.price}} PLN</div>-->
+<!--        </ng-template>-->
+
+<!--        <div class="ratings-container">-->
+<!--            <div class="ratings">-->
+<!--                <div class="ratings-val" [style.width]="product.ratings * 20 + '%'"></div>-->
+<!--                <span class="tooltip-text">{{ product.ratings.toFixed(2) }}</span>-->
+<!--            </div>-->
+<!--            <span class="ratings-text">( {{ product.review }} Reviews )</span>-->
+<!--        </div>-->
+
+<!--        <div class="product-nav product-nav-dots" *ngIf="product.variants.length > 0">-->
+<!--            <div class="row no-gutters">-->
+<!--                <a style="cursor: pointer;" [style.backgroundColor]="item.color" *ngFor="let item of product.variants">-->
+<!--                    <span class="sr-only">Color name</span></a>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>

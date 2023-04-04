@@ -1,0 +1,54 @@
+<div class="product text-center shadow-none">
+    <figure class="product-media">
+        <span class="product-label label-sale" *ngIf="product.discount">Wyprzedaż</span>
+        <span class="product-label label-out" *ngIf="!product.count || product.count === 0">Brak na stanie</span>
+
+        <a [routerLink]="['/product/'+ product.id]">
+            <vio-image [src]="product.photos[0].url" *ngIf="product.photos[0]" alt="Product" class="product-image">
+            </vio-image>
+            <vio-image [src]="product.photos[1].url" alt="Product" class="product-image-hover"
+                *ngIf="product.photos[1]"></vio-image>
+        </a>
+
+        <div class="product-action-vertical">
+            <a style="cursor: pointer;" class="btn-product-icon btn-wishlist"
+                [class.added-to-wishlist]="isInWishlist()" (click)="addToWishlist($event)">
+                <span>{{ isInWishlist() ? 'go' : 'add' }} to Wishlist</span>
+            </a>
+            <a style="cursor: pointer;" class="btn-product-icon btn-quickview" title="Quick view"
+                (click)="quickView($event)"><span>Quick view</span></a>
+        </div>
+    </figure>
+
+    <div class="product-body text-center bg-light-2">
+        <h3 class="product-title font-size-normal">
+            <a [routerLink]="['/product/'+ product.id]">{{ product.html_title }}</a>
+        </h3>
+
+        <div class="product-price font-size-normal mb-0 text-dark justify-content-center" *ngIf="!product.count || product.count === 0 else elseBlock">
+            <span class="out-price">{{ price }} PLN</span>
+            <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+        </div>
+
+        <ng-template #elseBlock>
+          <div class="product-price font-size-normal mb-0 text-dark justify-content-center w-100">{{price }} PLN
+            <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+          </div>
+        </ng-template>
+        <div class="product-footer justify-content-center d-block">
+<!--            <div class="ratings-container justify-content-center">-->
+<!--                <div class="ratings">-->
+<!--                    <div class="ratings-val" [style.width]="product.ratings * 20 + '%'"></div>-->
+<!--                    <span class="tooltip-text">{{ product.ratings.toFixed(2) }}</span>-->
+<!--                </div>-->
+<!--                <span class="ratings-text">( {{ product.review }} Reviews )</span>-->
+<!--            </div>-->
+            <div *ngIf="product.count && product.count !== 0">
+              <button class="btn font-size-normal letter-spacing-large btn-dark" (click)="addToCart($event)">
+                <i class="icon-cart-plus"></i>
+                <span class="text-uppercase">Do koszyka</span>
+              </button>
+            </div>
+        </div>
+    </div>
+</div>

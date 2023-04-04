@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div [class]="'d-flex align-items-center ' + (fullWidth ? 'container-fluid' : 'container')">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLink="/">Strona główna</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a routerLink="/product/dark-yellow-lace-cut-out-swing-dress">Product</a>
+            </li>
+            <li class="breadcrumb-item active">{{ current }}</li>
+        </ol>
+
+        <nav class="product-pager ml-auto" aria-label="Product">
+            <a [routerLink]="['../' + prev.id]" class="product-pager-link product-pager-prev"
+                [class]="{'prev-only': !next}" *ngIf="prev">
+                <i class="icon-angle-left"></i>
+                <span>Prev</span>
+                <div class="product-detail">
+                    <figure class="overflow-hidden">
+                        <vio-image [src]="prev.photos[0].url" alt="Product" class="product-image">
+                        </vio-image>
+                    </figure>
+                    <h3 class="product-name">{{ prev.html_title }}</h3>
+                </div>
+            </a>
+
+            <a [routerLink]="['../' + next.id]" class="product-pager-link product-pager-next" *ngIf="next">
+                <span>Next</span>
+                <i class="icon-angle-right"></i>
+                <div class="product-detail">
+                    <figure class="overflow-hidden">
+                        <vio-image [src]="next.photos[0].url" alt="Product" class="product-image">
+                        </vio-image>
+                    </figure>
+                    <h3 class="product-name">{{ next.html_title }}</h3>
+                </div>
+            </a>
+        </nav>
+    </div>
+</nav>

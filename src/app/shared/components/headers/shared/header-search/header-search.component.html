@@ -1,0 +1,39 @@
+<div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+    <a style="cursor: pointer;" class="search-toggle" role="button">
+        <i class="icon-search"></i>
+    </a>
+    <form action="#" method="get" (click)="showSearchForm($event)" (submit)="submitSearchForm($event)">
+        <div class="header-search-wrapper search-wrapper-wide">
+            <button class="btn btn-primary" type="submit">
+                <span class="sr-only">Search</span>
+                <i class="icon-search"></i>
+            </button>
+            <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Wyszukaj produkt ..."
+                required (input)="searchProducts($event)" />
+            <div class="live-search-list" *ngIf="searchTerm.length > 2">
+                <div class="autocomplete-suggestions" *ngIf="suggestions.length > 0" (click)="goProductPage()">
+                  <ng-container *ngFor="let product of suggestions">
+                    <a [routerLink]="'/product/' + product.id" class="autocomplete-suggestion" *ngIf="product.photos[0] && product.price">
+                      <figure class="mb-0 mr-3" style="width: 40px; height: 40px;">
+                        <vio-image [src]="product.photos[0].url" width="40" height="40"
+                                   alt="Product" class="bg-transparent">
+                        </vio-image>
+                      </figure>
+
+                      <div class="search-name" [innerHTML]="matchEmphasize(product.html_title) | safeContent"></div>
+                      <span class="search-price">
+                            <div class="product-price mb-0"
+                                 *ngIf="priceBlock">
+                                {{ product.price }} PLN</div>
+                            <ng-template #priceBlock>
+                                    <div class="product-price mb-0">${{product.price}} -
+                                      {{product.price}} PLN</div>
+                            </ng-template>
+                        </span>
+                    </a>
+                  </ng-container>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

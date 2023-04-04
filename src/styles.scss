@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import './scss/plugins/owl-carousel/owl.carousel.scss';
+@import './scss/style.scss';
+
+body {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-open .modal {
+  z-index: 5000;
+}

@@ -1,0 +1,59 @@
+<div class="sidebar-shop" [ngClass]="toggle ? 'sidebar-filter' : 'sidebar'">
+    <div [class.sidebar-filter-wrapper]="toggle">
+        <div class="widget widget-clean">
+            <label>Filtry:</label>
+            <a [routerLink]="" (click)="cleanFilters()" style="cursor:pointer;" class="sidebar-filter-clear">Wyczyść wszystko</a>
+        </div>
+
+        <div class="widget widget-collapsible">
+            <h3 class="widget-title mb-2">
+                <a data-toggle="collapse" href="javascript:void(0)widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                    Marka
+                </a>
+            </h3>
+
+            <div class="collapse show" id="widget-1">
+                <div class="widget-body pt-0">
+                    <div class="filter-items filter-items-count">
+                        <div class="filter-item" *ngFor="let item of categories">
+                            <a [routerLink]="" (click)="filterProducts(item.id);" [class.active]="brandActive(item.id)">{{
+                                item.name }}</a>
+                            <span class="item-count">{{ item.productsCount }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget widget-collapsible">
+            <h3 class="widget-title mb-2">
+                <a data-toggle="collapse" href="javascript:void(0)widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                    Cena
+                </a>
+            </h3>
+
+            <div class="collapse show" id="widget-5">
+                <div class="widget-body pt-0">
+                    <div class="filter-price">
+                        <div class="filter-price-text d-flex justify-content-between">
+                            <span>
+                                Przedział cenowy:
+                                <span class="filter-price-range">{{ priceRange[0] }} PLN -
+                                    {{ priceRange[1] }} PLN</span>
+                            </span>
+
+                            <button class="pr-2" (click)="filterPrice()">Filtruj</button>
+                        </div>
+
+                        <div class="price-slider">
+                            <nouislider #priceSlider [connect]="[true, true, true]" [ngModel]="priceRange" [min]="0"
+                                [max]="1500" [step]="5" [pageSteps]="1" (change)="changeFilterPrice($event)"
+                                style="padding: 0 1.5rem;">
+                            </nouislider>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

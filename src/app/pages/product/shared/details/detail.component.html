@@ -1,0 +1,75 @@
+<div class="product-details product-details-centered product-details-separator">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="product-title">{{ product.html_title }}</h1>
+
+                <div class="ratings-container">
+                    <div class="ratings">
+                        <div class="ratings-val" [style.width]="4 * 20 + '%'"></div>
+                        <span class="tooltip-text">4.00</span>
+                    </div>
+                    <span class="ratings-text">( 2 Opinie )</span>
+                </div>
+
+                <div class="product-price" *ngIf="!product.discount && product.count  else elseBlock">{{ product.price.toFixed(2) }} PLN</div>
+                <ng-template #elseBlock>
+                  <div class="product-price" *ngIf="product.count else elseBlock">
+                    <span class="new-price">{{ product.price.toFixed(2) }} PLN</span>
+                    <span class="old-price">{{ product.discount.toFixed(2) }} PLN</span>
+                  </div>
+
+                  <ng-template #elseBlock>
+                    <div class="product-price" *ngIf="!product.count || product.count === 0 else elseBlock">
+                      <span class="out-price">{{ product.price.toFixed(2) }} PLN</span>
+                      <span class="product-discount" *ngIf="product.discount">{{product.discount}} PLN</span>
+                    </div>
+                  </ng-template>
+              </ng-template>
+
+                <div class="product-content">
+                    <p [innerHTML]="product.category.description"></p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="product-details-action mb-1">
+                    <div class="details-action-col">
+                        <vio-quantity-input [max]="product.count" (changeQty)="onChangeQty( $event )" [value]="qty"
+                            adClass="mr-2 mr-sm-4">
+                        </vio-quantity-input>
+
+                        <a style="cursor: pointer;" class="btn-product btn-cart"
+                            [class.btn-disabled]="!cartService.canAddToCart( product, qty )"
+                            (click)="addCart( $event )"><span>dodaj do koszyka</span></a>
+                    </div>
+
+                    <div class="details-action-wrapper">
+                        <a style="cursor: pointer;" class="btn-product btn-wishlist"
+                            [class.added-to-wishlist]="isInWishlist()" (click)="addToWishlist($event)">
+                            <span>{{ isInWishlist() ? 'Idź' : 'Dodaj' }} do listy życzeń</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-details-footer details-footer-col">
+                    <div class="product-cat">
+                        <span>Kategoria:</span>
+                        <span>
+                            <a [routerLink]="['/shop']"
+                                [queryParams]="{category: product.category.id}">{{ product.category.name }}</a></span>
+                    </div>
+
+                    <div class="social-icons social-icons-sm">
+                        <span class="social-label">Podziel się:</span>
+                      <a  style="cursor: pointer;" (click)="copyToClipboard()" class="social-icon" title="Kopiuj do schowka"><i class="icon-slack-hash"></i></a>
+                      <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + getLink()" target="_blank" class="social-icon" title="Facebook"><i class="icon-facebook-f"></i></a>
+                      <a [href]="'https://twitter.com/intent/tweet?url=' + getLink()" target="_blank" class="social-icon" title="Twitter"><i class="icon-twitter"></i></a>
+                        <a [href]="'https://www.pinterest.com/pin/create/button/?url=' + getLink()" target="_blank" class="social-icon" title="Pinterest"><i class="icon-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
